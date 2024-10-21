@@ -1,0 +1,334 @@
+about:
+  date: October 21, 2024 01:27:57
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 11
+  number_tables: 12
+info_toggle_checked: true
+resources:
+  CustomChallenge:
+    attributes:
+    - label: ' challenge_name*'
+      name: challenge_name
+      required: true
+      search: true
+      sort: true
+    - name: description
+    - name: difficulty_level
+    - name: id
+    description: Contains custom challenges designed to motivate users in water intake.
+    info_list: Contains custom challenges designed to motivate users in water intake.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - challenge_id
+      name: UserChallengeList
+      resource: UserChallenge
+    type: CustomChallenge
+    user_key: challenge_name
+  HydrationSetting:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: user_id
+    - name: preferred_times
+    - name: water_type_preference
+    description: Stores individual user settings that affect hydration recommendations.
+    info_list: Stores individual user settings that affect hydration recommendations.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: HydrationSetting
+    user_key: id
+  Notification:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: message
+      required: true
+    - name: importance
+    description: Maintains a list of notifications that can be sent to users.
+    info_list: Maintains a list of notifications that can be sent to users.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - notification_id
+      name: UserNotificationList
+      resource: UserNotification
+    type: Notification
+    user_key: id
+  ProgressMilestone:
+    attributes:
+    - label: ' milestone_name*'
+      name: milestone_name
+      required: true
+      search: true
+      sort: true
+    - name: user_id
+    - name: achieved_date
+    - name: id
+    description: Tracks user achievements in water consumption over time.
+    info_list: Tracks user achievements in water consumption over time.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: ProgressMilestone
+    user_key: milestone_name
+  Reminder:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: user_id
+    - name: reminder_frequency
+      required: true
+    - name: reminder_type
+      required: true
+    description: Stores users' settings and preferences for hydration reminders.
+    info_list: Stores users' settings and preferences for hydration reminders.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: Reminder
+    user_key: id
+  User:
+    attributes:
+    - label: ' username*'
+      name: username
+      required: true
+      search: true
+      sort: true
+    - name: age
+    - name: weight
+    - name: activity_level
+    - name: climate
+    - name: id
+    description: Stores user information including personal details and preferences
+      for water intake.
+    info_list: Stores user information including personal details and preferences
+      for water intake.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - user_id
+      name: HydrationSettingList
+      resource: HydrationSetting
+    - direction: tomany
+      fks:
+      - user_id
+      name: ProgressMilestoneList
+      resource: ProgressMilestone
+    - direction: tomany
+      fks:
+      - user_id
+      name: ReminderList
+      resource: Reminder
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserAchievementList
+      resource: UserAchievement
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserChallengeList
+      resource: UserChallenge
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserNotificationList
+      resource: UserNotification
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterConsumptionList
+      resource: WaterConsumption
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterConsumptionStatisticList
+      resource: WaterConsumptionStatistic
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterIntakeGoalList
+      resource: WaterIntakeGoal
+    type: User
+    user_key: username
+  UserAchievement:
+    attributes:
+    - label: ' achievement_name*'
+      name: achievement_name
+      required: true
+      search: true
+      sort: true
+    - name: user_id
+    - name: achieved_date
+    - name: id
+    description: Stores records of various achievements by the user in the app.
+    info_list: Stores records of various achievements by the user in the app.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserAchievement
+    user_key: achievement_name
+  UserChallenge:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: challenge_id
+    - name: user_id
+    - name: start_date
+    - name: completion_date
+    description: Maps users to the challenges they have accepted or completed.
+    info_list: Maps users to the challenges they have accepted or completed.
+    tab_groups:
+    - direction: toone
+      fks:
+      - challenge_id
+      name: challenge
+      resource: CustomChallenge
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserChallenge
+    user_key: id
+  UserNotification:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: notification_id
+    - name: user_id
+    tab_groups:
+    - direction: toone
+      fks:
+      - notification_id
+      name: notification
+      resource: Notification
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserNotification
+    user_key: id
+  WaterConsumption:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: user_id
+    - name: timestamp
+    - name: amount_consumed
+      required: true
+    description: Records details of water consumption by users including timestamp
+      and amount.
+    info_list: Records details of water consumption by users including timestamp and
+      amount.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterConsumption
+    user_key: id
+  WaterConsumptionStatistic:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: user_id
+    - name: average_daily_intake
+    - name: peak_intake_time
+    description: Holds analytical data regarding users' water consumption patterns
+      over time.
+    info_list: Holds analytical data regarding users' water consumption patterns over
+      time.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterConsumptionStatistic
+    user_key: id
+  WaterIntakeGoal:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: user_id
+    - name: goal_amount
+      required: true
+    description: Holds user-defined daily water intake goals, personalized as per
+      user preferences.
+    info_list: Holds user-defined daily water intake goals, personalized as per user
+      preferences.
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterIntakeGoal
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

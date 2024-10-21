@@ -1,0 +1,101 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+
+Table CustomChallenge {
+    id INTEGER [primary key]
+    challenge_name VARCHAR 
+    description VARCHAR 
+    difficulty_level VARCHAR 
+    }
+
+Table HydrationSetting {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    preferred_times VARCHAR 
+    water_type_preference VARCHAR 
+    }
+
+Table User {
+    id INTEGER [primary key]
+    username VARCHAR 
+    age INTEGER 
+    weight FLOAT 
+    activity_level VARCHAR 
+    climate VARCHAR 
+    }
+
+Table Notification {
+    id INTEGER [primary key]
+    message VARCHAR 
+    importance VARCHAR 
+    }
+
+Table ProgressMilestone {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    milestone_name VARCHAR 
+    achieved_date DATETIME 
+    }
+
+Table Reminder {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    reminder_frequency VARCHAR 
+    reminder_type VARCHAR 
+    }
+
+Table UserAchievement {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    achievement_name VARCHAR 
+    achieved_date DATETIME 
+    }
+
+Table UserChallenge {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    challenge_id INTEGER 
+    start_date DATETIME 
+    completion_date DATETIME 
+    }
+
+Table UserNotification {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    notification_id INTEGER 
+    }
+
+Table WaterConsumption {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    amount_consumed FLOAT 
+    timestamp DATETIME 
+    }
+
+Table WaterConsumptionStatistic {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    average_daily_intake FLOAT 
+    peak_intake_time VARCHAR 
+    }
+
+Table WaterIntakeGoal {
+    id INTEGER [primary key]
+    user_id INTEGER 
+    goal_amount FLOAT 
+    }
+
+
+
+// Relationships
+    Ref: HydrationSetting.(user_id) < User.(id)
+    Ref: ProgressMilestone.(user_id) < User.(id)
+    Ref: Reminder.(user_id) < User.(id)
+    Ref: UserAchievement.(user_id) < User.(id)
+    Ref: UserChallenge.(challenge_id) < CustomChallenge.(id)
+    Ref: UserChallenge.(user_id) < User.(id)
+    Ref: UserNotification.(notification_id) < Notification.(id)
+    Ref: UserNotification.(user_id) < User.(id)
+    Ref: WaterConsumption.(user_id) < User.(id)
+    Ref: WaterConsumptionStatistic.(user_id) < User.(id)
+    Ref: WaterIntakeGoal.(user_id) < User.(id)

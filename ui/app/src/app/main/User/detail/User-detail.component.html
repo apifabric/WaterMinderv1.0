@@ -1,0 +1,482 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="username" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="User_form_edit" 
+        service="User" 
+        entity="User" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #username attr="username" label=" username*" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #age attr="age" label="age" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-text-input #weight attr="weight" label="weight" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #activity_level attr="activity_level" label="activity_level" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #climate attr="climate" label="climate" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="HYDRATIONSETTING-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="HydrationSettingTable" 
+        service="HydrationSetting" 
+        entity="HydrationSetting" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;user_id;preferred_times;water_type_preference"  
+        horizontal-scroll="yes"
+        detail-form-route="HydrationSetting" 
+        edit-form-route="HydrationSetting"
+        visible-columns="id;user_id;preferred_times;water_type_preference"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #preferred_times attr="preferred_times" title="preferred_times" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #water_type_preference attr="water_type_preference" title="water_type_preference" editable="no" required="no" content-align="left"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="PROGRESSMILESTONE-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="ProgressMilestoneTable" 
+        service="ProgressMilestone" 
+        entity="ProgressMilestone" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="milestone_name;user_id;achieved_date;id"  
+        horizontal-scroll="yes"
+        detail-form-route="ProgressMilestone" 
+        edit-form-route="ProgressMilestone"
+        visible-columns="milestone_name;user_id;achieved_date;id"  
+        sort-columns="milestone_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #milestone_name attr="milestone_name" title=" milestone_name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #achieved_date attr="achieved_date" type="timestamp" label="achieved_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="REMINDER-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="ReminderTable" 
+        service="Reminder" 
+        entity="Reminder" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;user_id;reminder_frequency;reminder_type"  
+        horizontal-scroll="yes"
+        detail-form-route="Reminder" 
+        edit-form-route="Reminder"
+        visible-columns="id;user_id;reminder_frequency;reminder_type"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #reminder_frequency attr="reminder_frequency" title="reminder_frequency" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #reminder_type attr="reminder_type" title="reminder_type" editable="no" required="yes" content-align="left"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="USERACHIEVEMENT-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="UserAchievementTable" 
+        service="UserAchievement" 
+        entity="UserAchievement" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="achievement_name;user_id;achieved_date;id"  
+        horizontal-scroll="yes"
+        detail-form-route="UserAchievement" 
+        edit-form-route="UserAchievement"
+        visible-columns="achievement_name;user_id;achieved_date;id"  
+        sort-columns="achievement_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #achievement_name attr="achievement_name" title=" achievement_name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #achieved_date attr="achieved_date" type="timestamp" label="achieved_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="USERCHALLENGE-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="UserChallengeTable" 
+        service="UserChallenge" 
+        entity="UserChallenge" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;challenge_id;user_id;start_date;completion_date"  
+        horizontal-scroll="yes"
+        detail-form-route="UserChallenge" 
+        edit-form-route="UserChallenge"
+        visible-columns="id;challenge_id;user_id;start_date;completion_date"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="challenge_id" title="challenge_id">
+    <o-table-cell-renderer-service attr="challenge_id" 
+        service="CustomChallenge" entity="CustomChallengeType" columns="id;challenge_name"
+        parent-keys="id:challenge_id"
+        value-column="challenge_name" keys="challenge_id"
+        visible-columns="challenge_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #start_date attr="start_date" type="timestamp" label="start_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-date-input #completion_date attr="completion_date" type="timestamp" label="completion_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="USERNOTIFICATION-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="UserNotificationTable" 
+        service="UserNotification" 
+        entity="UserNotification" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;notification_id;user_id"  
+        horizontal-scroll="yes"
+        detail-form-route="UserNotification" 
+        edit-form-route="UserNotification"
+        visible-columns="id;notification_id;user_id"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="notification_id" title="notification_id">
+    <o-table-cell-renderer-service attr="notification_id" 
+        service="Notification" entity="NotificationType" columns="id;id"
+        parent-keys="id:notification_id"
+        value-column="id" keys="notification_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="WATERCONSUMPTION-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="WaterConsumptionTable" 
+        service="WaterConsumption" 
+        entity="WaterConsumption" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;user_id;timestamp;amount_consumed"  
+        horizontal-scroll="yes"
+        detail-form-route="WaterConsumption" 
+        edit-form-route="WaterConsumption"
+        visible-columns="id;user_id;timestamp;amount_consumed"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #timestamp attr="timestamp" type="date" label="timestamp" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #amount_consumed attr="amount_consumed" title="amount_consumed" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="WATERCONSUMPTIONSTATISTIC-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="WaterConsumptionStatisticTable" 
+        service="WaterConsumptionStatistic" 
+        entity="WaterConsumptionStatistic" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;user_id;average_daily_intake;peak_intake_time"  
+        horizontal-scroll="yes"
+        detail-form-route="WaterConsumptionStatistic" 
+        edit-form-route="WaterConsumptionStatistic"
+        visible-columns="id;user_id;average_daily_intake;peak_intake_time"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #average_daily_intake attr="average_daily_intake" title="average_daily_intake" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+        
+          <o-table-column #peak_intake_time attr="peak_intake_time" title="peak_intake_time" editable="no" required="no" content-align="left"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="WATERINTAKEGOAL-user_id">
+    <div layout-padding>
+      <o-table 
+        attr="WaterIntakeGoalTable" 
+        service="WaterIntakeGoal" 
+        entity="WaterIntakeGoal" 
+        keys="id"
+        parent-keys="user_id:id"
+        columns="id;user_id;goal_amount"  
+        horizontal-scroll="yes"
+        detail-form-route="WaterIntakeGoal" 
+        edit-form-route="WaterIntakeGoal"
+        visible-columns="id;user_id;goal_amount"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #goal_amount attr="goal_amount" title="goal_amount" type="currency" editable="no" required="yes" currency-symbol="$" currency-symbol-position="left" thousand-separator=","decimal-separator="."></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

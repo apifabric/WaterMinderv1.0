@@ -1,0 +1,26 @@
+Use SQLAlchemy to create a sqlite database named system/genai/temp/model.sqlite  .
+
+The purpose of the database is: This is an app's backend system. It's a simple water intake tracker reminding users to drink water regularly. Users can set their daily water intake goals, log their water consumption, and receive notifications
+
+Here are the top three features of the WaterMinder app:
+
+Customizable Intake Goals: Allow users to set personalized daily water intake goals based on factors like age, weight, activity level, and climate. This feature provides a tailored experience, helping users meet their unique hydration needs.
+
+Progress Tracker: Visually engaging charts and graphs to track daily, weekly, and monthly water intake. Users can monitor their progress over time, setting milestones and celebrating achievements to stay motivated.
+
+Hydration Reminders: These intelligent reminders consider user preferences and past drinking patterns to suggest optimal hydration times. Users can customize notification frequency and even choose gentle nudges or fun challenges to keep them engaged.
+
+
+Create at least 12 tables.
+
+Hints: use autonum keys (for all tables - including for link/join/junction/intersection tables), allow nulls, foreign keys, no check constraints.
+If you choose to use a date, only use python datetime datatype.
+Remember that SQLite DateTime type only accepts Python datetime and date objects as input, this means you can not enter string attributes where a date or datetime object is expected.Provide a short description of each table. Include the description in each data model class docstring, prefixed with 'description: '. 
+Don't use python DECIMAL type.
+Don't install additional packages.
+Don't use the faker pip package.
+
+Create at least 48 rows of sample data: create at least one instance for every sqlalchemy class.
+Add some relationships and use foreign key columns instead of relationship names for the data inserts.
+Do not print the test data.
+Be sure to initialize derived attributes, but do not rely on LogicBank.

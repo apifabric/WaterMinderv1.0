@@ -1,0 +1,9 @@
+This is an app's backend system. It's a simple water intake tracker reminding users to drink water regularly. Users can set their daily water intake goals, log their water consumption, and receive notifications
+
+Here are the top three features of the WaterMinder app:
+
+Customizable Intake Goals: Allow users to set personalized daily water intake goals based on factors like age, weight, activity level, and climate. This feature provides a tailored experience, helping users meet their unique hydration needs.
+
+Progress Tracker: Visually engaging charts and graphs to track daily, weekly, and monthly water intake. Users can monitor their progress over time, setting milestones and celebrating achievements to stay motivated.
+
+Hydration Reminders: These intelligent reminders consider user preferences and past drinking patterns to suggest optimal hydration times. Users can customize notification frequency and even choose gentle nudges or fun challenges to keep them engaged.

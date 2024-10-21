@@ -1,0 +1,41 @@
+<o-form-layout-manager attr="User" mode="tab" title="USER">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="UserTable" 
+            service="User" 
+            entity="User" 
+            title="USER"
+            keys="id"
+            columns="username;age;weight;activity_level;climate;id" 
+            header-actions="R;D"
+            visible-columns="username;age;weight;activity_level;climate;id"  
+            sort-columns="username" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #username attr="username" title=" username*" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #age attr="age" title="age" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #weight attr="weight" title="weight" type="real" min-decimal-digits="2" max-decimal-digits="4" min="0" max="1000000.0000" content-align="center"></o-table-column>
+            
+            <o-table-column #activity_level attr="activity_level" title="activity_level" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #climate attr="climate" title="climate" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

@@ -1,0 +1,53 @@
+<o-form-layout-manager attr="UserChallenge" mode="tab" title="USERCHALLENGE">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="UserChallengeTable" 
+            service="UserChallenge" 
+            entity="UserChallenge" 
+            title="USERCHALLENGE"
+            keys="id"
+            columns="id;challenge_id;user_id;start_date;completion_date" 
+            header-actions="R;D"
+            visible-columns="id;challenge_id;user_id;start_date;completion_date"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="challenge_id" title="challenge_id">
+    <o-table-cell-renderer-service attr="challenge_id" 
+        service="CustomChallenge" entity="CustomChallengeType" columns="id;challenge_name"
+        parent-keys="id:challenge_id"
+        value-column="challenge_name" keys="challenge_id"
+        visible-columns="challenge_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #start_date attr="start_date" type="timestamp" label="start_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-date-input #completion_date attr="completion_date" type="timestamp" label="completion_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

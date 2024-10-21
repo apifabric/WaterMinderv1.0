@@ -1,0 +1,508 @@
+about:
+  date: October 21, 2024 01:27:57
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  CustomChallenge:
+    columns:
+    - label: ' challenge_name*'
+      name: challenge_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: description
+      template: text
+      type: VARCHAR
+    - name: difficulty_level
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Contains custom challenges designed to motivate users in water intake.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: challenge_name
+    home_template: home_template.html
+    info_list: Contains custom challenges designed to motivate users in water intake.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - challenge_id
+      name: UserChallengeList
+      resource: UserChallenge
+    type: CustomChallenge
+  HydrationSetting:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: preferred_times
+      template: text
+      type: VARCHAR
+    - name: water_type_preference
+      template: text
+      type: VARCHAR
+    description: Stores individual user settings that affect hydration recommendations.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Stores individual user settings that affect hydration recommendations.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: HydrationSetting
+  Notification:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: message
+      required: true
+      template: text
+      type: VARCHAR
+    - name: importance
+      template: text
+      type: VARCHAR
+    description: Maintains a list of notifications that can be sent to users.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Maintains a list of notifications that can be sent to users.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - notification_id
+      name: UserNotificationList
+      resource: UserNotification
+    type: Notification
+  ProgressMilestone:
+    columns:
+    - label: ' milestone_name*'
+      name: milestone_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: achieved_date
+      template: date
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Tracks user achievements in water consumption over time.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: milestone_name
+    home_template: home_template.html
+    info_list: Tracks user achievements in water consumption over time.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: ProgressMilestone
+  Reminder:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: reminder_frequency
+      required: true
+      template: text
+      type: VARCHAR
+    - name: reminder_type
+      required: true
+      template: text
+      type: VARCHAR
+    description: Stores users' settings and preferences for hydration reminders.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Stores users' settings and preferences for hydration reminders.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: Reminder
+  User:
+    columns:
+    - label: ' username*'
+      name: username
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: age
+      template: integer
+      type: INTEGER
+    - name: weight
+      template: real
+      type: FLOAT
+    - name: activity_level
+      template: text
+      type: VARCHAR
+    - name: climate
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Stores user information including personal details and preferences
+      for water intake.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: username
+    home_template: home_template.html
+    info_list: Stores user information including personal details and preferences
+      for water intake.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - user_id
+      name: HydrationSettingList
+      resource: HydrationSetting
+    - direction: tomany
+      fks:
+      - user_id
+      name: ProgressMilestoneList
+      resource: ProgressMilestone
+    - direction: tomany
+      fks:
+      - user_id
+      name: ReminderList
+      resource: Reminder
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserAchievementList
+      resource: UserAchievement
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserChallengeList
+      resource: UserChallenge
+    - direction: tomany
+      fks:
+      - user_id
+      name: UserNotificationList
+      resource: UserNotification
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterConsumptionList
+      resource: WaterConsumption
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterConsumptionStatisticList
+      resource: WaterConsumptionStatistic
+    - direction: tomany
+      fks:
+      - user_id
+      name: WaterIntakeGoalList
+      resource: WaterIntakeGoal
+    type: User
+  UserAchievement:
+    columns:
+    - label: ' achievement_name*'
+      name: achievement_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: achieved_date
+      template: date
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Stores records of various achievements by the user in the app.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: achievement_name
+    home_template: home_template.html
+    info_list: Stores records of various achievements by the user in the app.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserAchievement
+  UserChallenge:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: challenge_id
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: start_date
+      template: date
+      type: DATETIME
+    - name: completion_date
+      template: date
+      type: DATETIME
+    description: Maps users to the challenges they have accepted or completed.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Maps users to the challenges they have accepted or completed.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - challenge_id
+      name: challenge
+      resource: CustomChallenge
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserChallenge
+  UserNotification:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: notification_id
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - notification_id
+      name: notification
+      resource: Notification
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: UserNotification
+  WaterConsumption:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: timestamp
+      template: date
+      type: DATETIME
+    - name: amount_consumed
+      required: true
+      template: real
+      type: FLOAT
+    description: Records details of water consumption by users including timestamp
+      and amount.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Records details of water consumption by users including timestamp and
+      amount.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterConsumption
+  WaterConsumptionStatistic:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: average_daily_intake
+      template: real
+      type: FLOAT
+    - name: peak_intake_time
+      template: text
+      type: VARCHAR
+    description: Holds analytical data regarding users' water consumption patterns
+      over time.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Holds analytical data regarding users' water consumption patterns over
+      time.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterConsumptionStatistic
+  WaterIntakeGoal:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: user_id
+      template: integer
+      type: INTEGER
+    - name: goal_amount
+      required: true
+      template: real
+      type: FLOAT
+    description: Holds user-defined daily water intake goals, personalized as per
+      user preferences.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    home_template: home_template.html
+    info_list: Holds user-defined daily water intake goals, personalized as per user
+      preferences.
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - user_id
+      name: user
+      resource: User
+    type: WaterIntakeGoal
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

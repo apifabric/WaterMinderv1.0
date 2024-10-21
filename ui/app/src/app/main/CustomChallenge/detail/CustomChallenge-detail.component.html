@@ -1,0 +1,91 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="challenge_name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="CustomChallenge_form_edit" 
+        service="CustomChallenge" 
+        entity="CustomChallenge" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #challenge_name attr="challenge_name" label=" challenge_name*" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #description attr="description" label="description" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #difficulty_level attr="difficulty_level" label="difficulty_level" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="USERCHALLENGE-challenge_id">
+    <div layout-padding>
+      <o-table 
+        attr="UserChallengeTable" 
+        service="UserChallenge" 
+        entity="UserChallenge" 
+        keys="id"
+        parent-keys="challenge_id:id"
+        columns="id;challenge_id;user_id;start_date;completion_date"  
+        horizontal-scroll="yes"
+        detail-form-route="UserChallenge" 
+        edit-form-route="UserChallenge"
+        visible-columns="id;challenge_id;user_id;start_date;completion_date"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="challenge_id" title="challenge_id">
+    <o-table-cell-renderer-service attr="challenge_id" 
+        service="CustomChallenge" entity="CustomChallengeType" columns="id;challenge_name"
+        parent-keys="id:challenge_id"
+        value-column="challenge_name" keys="challenge_id"
+        visible-columns="challenge_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="user_id" title="user_id">
+    <o-table-cell-renderer-service attr="user_id" 
+        service="User" entity="UserType" columns="id;username"
+        parent-keys="id:user_id"
+        value-column="username" keys="user_id"
+        visible-columns="username" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #start_date attr="start_date" type="timestamp" label="start_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-date-input #completion_date attr="completion_date" type="timestamp" label="completion_date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>
